@@ -12,7 +12,12 @@ def get_all_products():
     """Возвращает список всех товаров."""
     conn = get_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM Товар ORDER BY id")
+    cur.execute("""
+        SELECT id, название, категория, производитель,
+               характеристики, цена, количество, изображение, модель
+        FROM Товар
+        ORDER BY id
+    """)
     rows = cur.fetchall()
     conn.close()
     return rows
